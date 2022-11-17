@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  </head>
+<body>
+<section layout:fragment="content">
+
+<div class="container">
+
+  <h3>Add New Student</h3>
+  <a th:href="@{/home}" class="btn btn-primary">Home</a>
+
+  <hr/>
+
+  <form th:action="@{/saveStudent}" th:object="${student}" method="POST">
+    <span class="text-danger" th:text="${message}"></span>
+    <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+    <label>Gender</label>
+    <div>
+      <select th:field="*{sex}">
+        <option th:value="'M'" th:text="Male"></option>
+        <option th:value="'F'" th:text="Female"></option>
+      </select>
+    </div>
+    </br>
+    <!--  <input type="text" th:field="*{dob}" class="form-control col-4 mb-4" placeholder="Enter dob" />
+     -->
+    <div>
+      <label>Date Of Birth</label>
+      <input type="date" th:field="*{dob}" class="form-control" name="birthDate">
+    </div>
+
+
+
+    <input type="text" th:field="*{email}" class="form-control col-4 mb-4" placeholder="Enter email" />
+    <input type="text" th:field="*{city}" class="form-control col-4 mb-4" placeholder="Enter City" />
+    <input type="text" th:field="*{phone}" class="form-control col-4 mb-4" placeholder="Enter phone" />
+    <!--   <input type="text" th:field="*{grade}" class="form-control col-4 mb-4" placeholder="Enter Grade" />
+
+ />-->
+    </br>
+    <p></p>
+    <div>
+      <label>Grade</label>
+      <select th:field="*{grade}">
+
+        <option th:each="item : ${mygrade}" th:value="${item.getId()}" th:text="${item.getNumber()}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary col-2">Save</button>
+    <input type="hidden" th:field="*{id}" />
+
+  </form>
+  <hr/>
+  <a th:href="@{/list}">Back to list</a>
+</div>
+</section>
+</body>
+</html>
